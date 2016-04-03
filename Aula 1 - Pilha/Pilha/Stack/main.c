@@ -15,33 +15,61 @@ struct stack {
     int size;
 };
 
-typedef struct stack stack;
+typedef struct stack Stack;
+Stack myStack;
 
-void push(stack *s, int value) {
+void push(int value) {
     
     // É necessário verificar se a pilha não está cheia antes
     // de fazer a inserção do novo valor
     
-    if (s->size < kStackMaxSize) {
-        s->data[s->size++] = value;
+    if (myStack.size < kStackMaxSize) {
+        printf("Adição do valor %d na pilha\n", value);
+        myStack.data[myStack.size++] = value;
     } else {
-        // A pilha já esta cheia, nada para fazer aqui
+        printf("Pilha cheia 😕 - Nenhum elemento será adicionado\n");
     }
 }
 
-void pop(stack *s) {
+void pop() {
     
     // Antes de remover um item da pilha é necessário checar
     // se a mesma possui algum item
     
-    if (s->size == 0) {
-        // Pilha vazia, nada para fazer aqui
+    if (myStack.size == 0) {
+        printf("Pilha vazia 😕 - Nenhum elemento para remover\n");
     } else {
-        s->size--;
+        myStack.size--;
     }
 }
 
+void print() {
+    
+    if (myStack.size > 0) {
+        printf("Conteúdo da pilha: \n");
+        for (int i = 0; i < myStack.size; i++) {
+            printf("Valor: %d\n", myStack.data[i]);
+        }
+    } else {
+        printf("Pilha vazia 😕\n");
+    }
+    
+}
+
 int main(int argc, const char * argv[]) {
+    
+    // Inclusão de alguns valores
+    push(1);
+    push(2);
+    push(3);
+    push(5);
+    push(8);
+    
+    // Remoção do último valor (8)
+    pop();
+    
+    // Exibição do conteúdo da pilha
+    print();
     
     return 0;
 }
